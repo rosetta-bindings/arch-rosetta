@@ -4,12 +4,10 @@
     "//3": "qualified C++ types (they are spliced into binding_info<T> / ^^fn).",
     "//4": "Headers are relative to user_include (extern/arch/include).",
     "//5": "Generate: extern/rosetta/bin/rosetta_gen manifest.json gen",
-
     "cpp26_root": "$ENV{HOME}/devs/c++/clang-p2996/build",
     "cpp26_cxx": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang++",
     "cpp26_cc": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang",
     "cpp26_lib": "$ENV{HOME}/devs/c++/clang-p2996/build/lib",
-    
     "user_include": [
         "extern/arch/include",
         "extern/eigen",
@@ -38,19 +36,19 @@
     ],
     "rosetta_include": "extern/rosetta/include",
     "generator_name": "arch",
-    "module_name": "pyarch3",
+    "module_name": "arch",
     "targets": [
         {
             "lang": "python",
-            "name": "arch3"
+            "name": "arch"
         },
         {
             "lang": "node",
-            "name": "arch3"
+            "name": "arch"
         },
         {
             "lang": "wasm-expanded",
-            "name": "arch3"
+            "name": "arch"
         }
     ],
     "classes": [

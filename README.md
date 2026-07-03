@@ -21,7 +21,7 @@ This project points [**Rosetta**](https://github.com/xaliphostes/rosetta) at the
 cmake -S . -B build && cmake --build build -j
 ```
 
-### Generate the generator for PMP
+### Generate the generator for Arch
 
 ```sh
 extern/rosetta/bin/rosetta_gen manifest.json gen
@@ -58,7 +58,7 @@ source ./emsdk_env.sh && cd ..
 
 Then configure with `emcmake`:
 ```sh
-# Build the wasm bindings (emits pmp.js + pmp.wasm)
+# Build the wasm bindings (emits arch3.js + arch3.wasm)
 emcmake cmake -S bindings/wasm-expanded -B bindings/wasm-expanded/build
 cmake --build bindings/wasm-expanded/build -j
 ```
