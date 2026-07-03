@@ -4,7 +4,7 @@
 <h1 align="center">Arch&nbsp;×&nbsp;Rosetta</h1>
 
 <p align="center">
-  <em>Automatic, multi-language bindings for Arch (private), a 3D BEM code.</em>
+  <em>Automatic, multi-language bindings for the Arch library(private), a 3D BEM code — generated, not hand-written</em>
 </p>
 
 <p align="center">
