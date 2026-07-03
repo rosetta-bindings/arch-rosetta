@@ -1,0 +1,262 @@
+{
+    "//": "Rosetta binding manifest for arch3. Mirrors the hand-written pybind11",
+    "//2": "bindings in ../python/binding_*.cxx. Class/function names are fully",
+    "//3": "qualified C++ types (they are spliced into binding_info<T> / ^^fn).",
+    "//4": "Headers are relative to user_include (extern/arch/include).",
+    "//5": "Generate: extern/rosetta/bin/rosetta_gen manifest.json gen",
+
+    "cpp26_root": "$ENV{HOME}/devs/c++/clang-p2996/build",
+    "cpp26_cxx": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang++",
+    "cpp26_cc": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang",
+    "cpp26_lib": "$ENV{HOME}/devs/c++/clang-p2996/build/lib",
+    
+    "user_include": [
+        "extern/arch/include",
+        "extern/eigen",
+        "extern/krylov/include"
+    ],
+    "//sources": "arch3 implementation .cxx files compiled straight into every binding target (no prebuilt lib). Globs are non-recursive POSIX, so each src subdir is listed explicitly. Re-run rosetta_gen after adding/removing source dirs.",
+    "user_sources": [
+        "extern/arch/src/*.cxx",
+        "extern/arch/src/algos/*.cxx",
+        "extern/arch/src/algos/pore-pressure/*.cxx",
+        "extern/arch/src/algos/slip-inversion/*.cxx",
+        "extern/arch/src/algos/stress-inversion/*.cxx",
+        "extern/arch/src/choubidou/*.cxx",
+        "extern/arch/src/concurrent/*.cxx",
+        "extern/arch/src/core/*.cxx",
+        "extern/arch/src/dataframe/*.cxx",
+        "extern/arch/src/dataframe/math/*.cxx",
+        "extern/arch/src/filters/*.cxx",
+        "extern/arch/src/hmatrix/*.cxx",
+        "extern/arch/src/io/*.cxx",
+        "extern/arch/src/math/*.cxx",
+        "extern/arch/src/postprocess/*.cxx",
+        "extern/arch/src/solvers/*.cxx",
+        "extern/arch/src/temperature/*.cxx",
+        "extern/arch/src/utils/*.cxx"
+    ],
+    "rosetta_include": "extern/rosetta/include",
+    "generator_name": "arch",
+    "module_name": "pyarch3",
+    "targets": [
+        {
+            "lang": "python",
+            "name": "arch3"
+        },
+        {
+            "lang": "node",
+            "name": "arch3"
+        },
+        {
+            "lang": "wasm-expanded",
+            "name": "arch3"
+        }
+    ],
+    "classes": [
+        {
+            "//": "--- math ---",
+            "name": "arch::Vector3",
+            "header": "Arch/math/math.h"
+        },
+        {
+            "name": "arch::Matrix33",
+            "header": "Arch/math/math.h"
+        },
+        {
+            "//": "--- dataframe ---",
+            "name": "df::Serie",
+            "header": "Arch/dataframe/Serie.h"
+        },
+        {
+            "//": "--- core ---",
+            "name": "arch::Model",
+            "header": "Arch/core/Model.h"
+        },
+        {
+            "name": "arch::Surface",
+            "header": "Arch/core/Surface.h"
+        },
+        {
+            "name": "arch::BaseRemote",
+            "header": "Arch/core/Remote.h"
+        },
+        {
+            "name": "arch::RemoteStress",
+            "header": "Arch/core/Remote.h"
+        },
+        {
+            "name": "arch::UserRemote",
+            "header": "Arch/core/Remote.h"
+        },
+        {
+            "//": "--- inequality constraints (TIC / DIC) ---",
+            "name": "arch::Tic",
+            "header": "Arch/core/Inequality.h"
+        },
+        {
+            "name": "arch::Dic",
+            "header": "Arch/core/Inequality.h"
+        },
+        {
+            "name": "arch::FunctionalTic",
+            "header": "Arch/core/Inequality.h"
+        },
+        {
+            "name": "arch::FunctionalDic",
+            "header": "Arch/core/Inequality.h"
+        },
+        {
+            "name": "arch::Coulomb",
+            "header": "Arch/core/Inequality.h"
+        },
+        {
+            "//": "--- temperature ---",
+            "name": "arch::TemperatureField",
+            "header": "Arch/temperature/TemperatureField.h"
+        },
+        {
+            "//": "--- solvers ---",
+            "name": "arch::GmresSolver",
+            "header": "Arch/solvers/Gmres.h"
+        },
+        {
+            "name": "arch::JacobiSolver",
+            "header": "Arch/solvers/Jacobi.h"
+        },
+        {
+            "name": "arch::SeidelSolver",
+            "header": "Arch/solvers/Seidel.h"
+        },
+        {
+            "name": "arch::ParallelSolver",
+            "header": "Arch/solvers/ParallelSolver.h"
+        },
+        {
+            "name": "arch::HMatrixGmresSolver",
+            "header": "Arch/solvers/HMatrixGmresSolver.h"
+        },
+        {
+            "name": "arch::HMatrixIterativeSolver",
+            "header": "Arch/solvers/HMatrixIterativeSolver.h"
+        },
+        {
+            "name": "arch::HMatrixJacobiSolver",
+            "header": "Arch/solvers/HMatrixJacobiSolver.h"
+        },
+        {
+            "name": "arch::HMatrixSeidelSolver",
+            "header": "Arch/solvers/HMatrixSeidelSolver.h"
+        },
+        {
+            "name": "arch::HMatrixParallelGmresSolver",
+            "header": "Arch/solvers/HMatrixParallelGmresSolver.h"
+        },
+        {
+            "name": "arch::H2MatrixGmresSolver",
+            "header": "Arch/solvers/H2MatrixGmresSolver.h"
+        },
+        {
+            "//": "--- postprocess ---",
+            "name": "arch::Postprocess",
+            "header": "Arch/postprocess/Postprocess.h"
+        },
+        {
+            "name": "arch::ParallelPostprocess",
+            "header": "Arch/postprocess/ParallelPostprocess.h"
+        },
+        {
+            "name": "arch::HPostprocess",
+            "header": "Arch/postprocess/HPostprocess.h"
+        },
+        {
+            "name": "arch::HMatrixParallelPostprocess",
+            "header": "Arch/postprocess/HMatrixParallelPostprocess.h"
+        },
+        {
+            "//": "--- algos ---",
+            "name": "arch::DataSuperposition",
+            "header": "Arch/algos/DataSuperposition.h"
+        },
+        {
+            "name": "arch::CoulombSuperposition",
+            "header": "Arch/algos/CoulombSuperposition.h"
+        },
+        {
+            "name": "arch::FrictionInversion",
+            "header": "Arch/algos/FrictionInversion.h"
+        },
+        {
+            "//": "--- stress inversion (sinv) ---",
+            "name": "arch::sinv::Data",
+            "header": "Arch/algos/stress-inversion/Data.h"
+        },
+        {
+            "name": "arch::sinv::JointData",
+            "header": "Arch/algos/stress-inversion/JointData.h"
+        },
+        {
+            "name": "arch::sinv::StyloliteData",
+            "header": "Arch/algos/stress-inversion/StyloliteData.h"
+        },
+        {
+            "name": "arch::sinv::DykeData",
+            "header": "Arch/algos/stress-inversion/DykeData.h"
+        },
+        {
+            "name": "arch::sinv::ConjugateData",
+            "header": "Arch/algos/stress-inversion/ConjugateData.h"
+        },
+        {
+            "name": "arch::sinv::GpsData",
+            "header": "Arch/algos/stress-inversion/GpsData.h"
+        },
+        {
+            "name": "arch::sinv::InsarData",
+            "header": "Arch/algos/stress-inversion/InsarData.h"
+        },
+        {
+            "name": "arch::sinv::ShearFractureData",
+            "header": "Arch/algos/stress-inversion/ShearFractureData.h"
+        },
+        {
+            "name": "arch::sinv::ShearPlaneData",
+            "header": "Arch/algos/stress-inversion/ShearPlaneData.h"
+        },
+        {
+            "name": "arch::sinv::MCInversion",
+            "header": "Arch/algos/stress-inversion/MCInversion.h"
+        },
+        {
+            "name": "arch::sinv::MCMCInversion",
+            "header": "Arch/algos/stress-inversion/MCMCInversion.h"
+        },
+        {
+            "name": "arch::sinv::AlphaParameter",
+            "header": "Arch/algos/stress-inversion/types.h"
+        },
+        {
+            "name": "arch::sinv::InversionResult",
+            "header": "Arch/algos/stress-inversion/types.h"
+        },
+        {
+            "name": "arch::sinv::MCMCChainEntry",
+            "header": "Arch/algos/stress-inversion/types.h"
+        },
+        {
+            "name": "arch::sinv::MCMCConfig",
+            "header": "Arch/algos/stress-inversion/types.h"
+        },
+        {
+            "name": "arch::sinv::MCMCResult",
+            "header": "Arch/algos/stress-inversion/types.h"
+        }
+    ],
+    "functions": [
+        {
+            "doc": "Eigen decomposition of a stress tensor",
+            "name": "arch::stressEigen",
+            "header": "Arch/algos/stress-inversion/StressUtils.h"
+        }
+    ]
+}
