@@ -47,6 +47,10 @@
             "name": "arch"
         },
         {
+            "lang": "typescript",
+            "name": "arch"
+        },
+        {
             "lang": "wasm-expanded",
             "name": "arch"
         }
