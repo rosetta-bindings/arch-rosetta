@@ -1,11 +1,11 @@
-![PMP – remeshing & curvature analysis on the fandisk model](media/arch.jpg)
-![PMP – remeshing & curvature analysis on the fandisk model](media/figure_stresses.jpg)
-
 <h1 align="center">Arch&nbsp;×&nbsp;Rosetta</h1>
 
 <p align="center">
   <em>Automatic, multi-language bindings for the Arch library(private), a 3D BEM code — generated, not hand-written</em>
 </p>
+
+![PMP – remeshing & curvature analysis on the fandisk model](media/arch.jpg)
+![PMP – remeshing & curvature analysis on the fandisk model](media/figure_stresses.jpg)
 
 <p align="center">
   <a href="https://github.com/xaliphostes/arch3"><img src="https://img.shields.io/badge/library-ARCH-2c7fb8.svg" alt="Arch"></a>
