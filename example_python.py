@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # ============================================================================
 # Forward Boundary Element Method (BEM) model using the rosetta-generated
-# `arch3` python binding.
+# `arch` python binding.
 #
 # This is the rosetta equivalent of scripts/forward.py — the simplest
-# meaningful arch3 workflow:
+# meaningful arch workflow:
 #
 #       Model -> Surface (fault) -> boundary conditions -> remote stress
 #             -> iterative solve -> post-process displacement & stress
 #
 # Unlike scripts/forward.py it is fully self-contained: the fault mesh is
 # generated in-code (no .ts file, no xali_tools dependency), so it runs
-# against nothing but the freshly built `arch3` module in ./bindings/python.
+# against nothing but the freshly built `arch` module in ./bindings/python.
 #
-# NOTE on API differences vs. the hand-written `pyarch3` used in scripts/:
+# NOTE on API differences vs. the hand-written `pyarch` used in scripts/:
 #   - Surfaces are created with `model.addSurface(positions, indices)`
-#     (returns a Surface), not `arch3.Surface(model, ...)`.
+#     (returns a Surface), not `arch.Surface(model, ...)`.
 #   - `UserRemote(fn, isStress=True)` takes the stress/strain flag. It is passed
 #     to `Model.addRemote()`, which expects a `BaseRemote` — the rosetta python
 #     binding registers the `UserRemote : BaseRemote` inheritance, so this works.
@@ -25,9 +25,9 @@ import os
 import sys
 
 # Make the freshly built binding importable regardless of CWD.
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "bindings", "python"))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "bindings", "python-expanded"))
 
-import arch3
+import arch
 
 
 # ============================================================================
@@ -36,7 +36,7 @@ import arch3
 def make_strip_mesh(origin, axis1, axis2, n1, n2):
     """Rectangular grid of n1 x n2 quads -> 2*n1*n2 triangles.
 
-    Returns (positions, indices) as the flat lists arch3 expects:
+    Returns (positions, indices) as the flat lists arch expects:
       positions = [x0,y0,z0, x1,y1,z1, ...]
       indices   = [i0,i1,i2, i3,i4,i5, ...]
     """
@@ -62,7 +62,7 @@ def make_strip_mesh(origin, axis1, axis2, n1, n2):
 # ============================================================================
 # 1. Model + material
 # ============================================================================
-model = arch3.Model()
+model = arch.Model()
 model.setHalfSpace(False)
 # setMaterial(poisson, young [Pa], density)
 model.setMaterial(0.25, 20e9, 2500)
@@ -110,14 +110,14 @@ def remote_stress(x, y, z):
     return [Shmin, Sxy, 0.0, SHmax, 0.0, Sv]
 
 
-remote = arch3.UserRemote(remote_stress, True)  # True => the field is a stress
+remote = arch.UserRemote(remote_stress, True)  # True => the field is a stress
 model.addRemote(remote)
 
 
 # ============================================================================
 # 4. Solve (Gauss-Seidel iterative BEM solver)
 # ============================================================================
-solver = arch3.SeidelSolver(model)
+solver = arch.SeidelSolver(model)
 solver.setEps(1e-9)
 solver.setMaxIter(200)
 solver.onMessage(lambda msg: print(f"  [solver] {msg}"))
@@ -131,7 +131,7 @@ print(f"Solver converged: {ok}")
 # ============================================================================
 # 5. Post-process: slip on the fault, and stress/displacement in the medium
 # ============================================================================
-post = arch3.Postprocess(model)
+post = arch.Postprocess(model)
 
 # Burgers vectors (slip) on each triangle, in the local fault frame.
 burgers = post.burgersFor(fault, True, True)  # local=True, atTriangles=True
