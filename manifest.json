@@ -82,6 +82,26 @@
             {"header": "CoulombSuperposition.h"},
             {"header": "FrictionInversion.h"},
 
+            {"//": "slip inversion (arch:: — 'expose' disambiguates from the sinv:: data classes)",
+             "header_dir": "slip-inversion", "entries": [
+                {"header": "Data.h",           "expose": "SlipData"},
+                {"header": "AlgoBuilder.h","expose": "SlipAlgoBuilder"},
+                {"header": "DisplData.h", "expose": "SlipDisplData"},
+                {"header": "OrientationData.h", "expose": "SlipOrientationData"},
+                {"header": "TensorData.h", "expose": "SlipTensorData"},
+                {"header": "GpsData.h",        "expose": "SlipGpsData"},
+                {"header": "InsarData.h",      "expose": "SlipInsarData"},
+                {"header": "JointData.h",      "expose": "SlipJointData"},
+                {"header": "ConjugateData.h",  "expose": "SlipConjugateData"},
+                {"header": "FocalMechanismData.h", "expose": "SlipFocalMechanismData"},
+                {"header": "ShearPlaneData.h", "expose": "SlipShearPlaneData"},
+                {"header": "SeismicityData.h", "expose": "SlipSeismicityData"},
+                {"header": "StrainData.h", "expose": "SlipStrainData"},
+                {"header": "StressData.h", "expose": "SlipStressData"},
+                {"header": "TiltData.h", "expose": "SlipTiltData"},
+                {"header": "SlipInversion.h"}
+            ]},
+
             {"//": "stress inversion", "namespace": "sinv", "header_dir": "stress-inversion", "entries": [
                 {"header": "Data.h"},
                 {"header": "JointData.h"},
