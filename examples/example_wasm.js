@@ -33,7 +33,7 @@
 "use strict";
 
 const path = require("path");
-const createModule = require(path.join(__dirname, "bindings", "wasm-expanded", "build", "arch3.js"));
+const createModule = require(path.join(__dirname, "..", "bindings", "wasm-expanded", "build", "arch3.js"));
 
 // Build an embind vector_<T> from a JS array (caller must .delete() it).
 function toVec(Module, ctorName, arr) {

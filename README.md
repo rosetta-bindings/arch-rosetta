@@ -80,23 +80,33 @@ Nothing to be done. File `d.ts` auto-generated.
 
 ### Run the examples
 
-Each backend has a ready-to-run demo at the project root. Build the matching
-binding above first, then run from the project root:
+Each backend has a ready-to-run demo in `examples/`. Build the matching
+binding above first, then run from anywhere (the scripts locate the binding
+relative to themselves):
 
 #### 1. Python
 
 ```sh
-python3 example_python.py
+python3 examples/example_python.py
 ```
 
 #### 2. Node (native N-API addon)
 
 ```sh
-node example_node.js
+node examples/example_node.js
 ```
 
 #### 3. WebAssembly with Node
 
 ```sh
-node example_wasm.js
+node examples/example_wasm.js
+```
+
+#### 4. Hector Mine slip inversion (python)
+
+A real case: the 1999 Mw 7.1 Hector Mine InSAR slip inversion, replicating the
+historical Poly3Dinv run of `examples/HectorMine/hector3.txt`.
+
+```sh
+python3 examples/HectorMine/main.py
 ```

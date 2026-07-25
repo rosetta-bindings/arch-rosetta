@@ -7,7 +7,8 @@
 //
 // Build the addon first (needs Node + a C++26 / p2996 toolchain):
 //     cd bindings/node && npm install && npm run build
-// which produces bindings/node/build/Release/arch3.node. Then: node example_node.js
+// which produces bindings/node/build/Release/arch3.node.
+// Then, from the repository root: node examples/example_node.js
 //
 // ---------------------------------------------------------------------------
 // This runs: the Node backend marshals raw pointers to bound classes, so
@@ -26,7 +27,7 @@
 "use strict";
 
 const path = require("path");
-const arch3 = require(path.join(__dirname, "bindings", "node", "build", "Release", "arch3.node"));
+const arch3 = require(path.join(__dirname, "..", "bindings", "node", "build", "Release", "arch3.node"));
 
 // ---------------------------------------------------------------------------
 // Helper: build a flat rectangular triangulated patch (the fault surface)

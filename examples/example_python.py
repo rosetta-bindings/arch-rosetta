@@ -11,7 +11,7 @@
 #
 # Unlike scripts/forward.py it is fully self-contained: the fault mesh is
 # generated in-code (no .ts file, no xali_tools dependency), so it runs
-# against nothing but the freshly built `arch` module in ./bindings/python.
+# against nothing but the freshly built `arch` module in ../bindings/python-expanded.
 #
 # NOTE on API differences vs. the hand-written `pyarch` used in scripts/:
 #   - Surfaces are created with `model.addSurface(positions, indices)`
@@ -25,7 +25,9 @@ import os
 import sys
 
 # Make the freshly built binding importable regardless of CWD.
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "bindings", "python-expanded"))
+sys.path.insert(
+    0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "bindings", "python-expanded")
+)
 
 import arch
 

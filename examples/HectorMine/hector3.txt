@@ -1,0 +1,33 @@
+Poly3Dinv 1.0
+
+set $PATH_MODEL .
+set $PATH_DATA  .
+set $FILE hector3flt
+
+header
+	smooth			.1
+	input_file		$(PATH_MODEL)/$(FILE).in
+	output_file     $(PATH_MODEL)/$(FILE)_result.ts
+	#output_file    matlab
+	writer gocad_ts
+
+	set $FAULTS seg1 seg2 seg3
+	#set $FAULTS seg3
+
+	units_factor 1e15
+
+	constraint $(FAULTS) scale 0.0001 on border for slip
+	constraint $(FAULTS) scale 1 on intersection for slip
+
+	constraint $(FAULTS) negative for dip
+	constraint $(FAULTS) negative for strike
+end
+
+begin_insar
+	name			insar1
+	column			x y z u
+	file			$(PATH_DATA)/dpqgrid.dat
+	satellite		-0.38 0.07 -0.92
+	scale_u			.001
+	check_tilting	yes
+end
