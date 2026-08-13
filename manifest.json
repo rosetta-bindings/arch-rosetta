@@ -6,30 +6,35 @@
     "//5": "— pass verbatim; an omitted name derives from the header stem).",
     "//6": "Headers are relative to user_include (extern/arch/include).",
     "//7": "Generate: extern/rosetta/bin/rosetta_gen manifest.json gen",
+
     "cpp26_root": "$ENV{HOME}/devs/c++/clang-p2996/build",
     "cpp26_cxx": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang++",
     "cpp26_cc": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang",
     "cpp26_lib": "$ENV{HOME}/devs/c++/clang-p2996/build/lib",
+
+    "wheel": true,
+    "wheel_dir": "../dist/wheels",
+
     "user_include": [
         "extern/arch/include",
         "extern/eigen",
         "extern/krylov/include"
     ],
+
     "//sources": "arch3 implementation .cxx files compiled straight into every binding target (no prebuilt lib). ** matches zero or more directories (globstar), so this one pattern covers src/ and every subdirectory. Re-run rosetta_gen after adding/removing source files.",
     "user_sources": [
         "extern/arch/src/**/*.cxx"
     ],
+
     "rosetta_include": "extern/rosetta/include",
     "generator_name": "arch",
     "module_name": "arch",
     "namespace": "arch",
     "header_dir": "Arch",
     "targets": [
-        {"lang": "python-expanded",        "name": "arch"},
-        {"lang": "node-expanded",          "name": "arch"},
-        {"lang": "wasm-expanded", "name": "arch"},
-        {"lang": "typescript",    "name": "arch"}
+        {"lang": "nanobind", "name": "arch"}
     ],
+
     "classes": [
         {"//": "--- math ---", "header": "math/math.h", "entries": [
             {"name": "Vector3"},
@@ -39,6 +44,7 @@
         {"//": "--- dataframe ---", "name": "df::Serie", "header": "dataframe/Serie.h"},
 
         {"//": "--- core ---", "header_dir": "core", "entries": [
+            {"header": "Triangle.h"},
             {"header": "Model.h"},
             {"header": "Surface.h"},
             {"//": "remotes", "header": "Remote.h", "entries": [
@@ -54,6 +60,9 @@
                 {"name": "Coulomb"}
             ]}
         ]},
+
+        {"//": "--- tabular (layered) medium, attached via Model::setTabularMedium ---",
+         "header": "choubidou/TabularMedium.h"},
 
         {"//": "--- temperature ---", "header": "temperature/TemperatureField.h"},
 

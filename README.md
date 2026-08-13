@@ -26,57 +26,19 @@ This project points [**Rosetta**](https://github.com/xaliphostes/rosetta) at the
 > __More info about the technology__:
 > [Maerten, F., Maerten, L., & Pollard, D. D. (2014). iBem3D, a three-dimensional iterative boundary element method using angular dislocations for modeling geologic structures. Computers and Geosciences, 72, 1-17]((https://www.sciencedirect.com/science/article/abs/pii/S0098300414001496#:~:text=Review-,iBem3D%2C%20a%20three-dimensional%20iterative%20boundary%20element%20method%20using%20angular,dislocations%20for%20modeling%20geologic%20structures))
 
-### Fetch Arch and Rosetta
+## Build
 
-```sh
-cmake -S . -B build && cmake --build build -j
+One-time bootstrap: fetch `rosetta` into `extern/` and build `rosetta_gen`:
+
+```bash
+cmake -B build && cmake --build build
 ```
 
-### Generate the generator for Arch
+Then, generate the `generator` + all the bindings and compile all of them:
 
-```sh
-extern/rosetta/bin/rosetta_gen manifest.json gen
-cmake -S gen -B gen/build && cmake --build gen/build
+```bash
+./extern/rosetta/bin/rosetta_gen --build manifest.json
 ```
-
-### Generate the bindings
-
-```sh
-./generator bindings
-```
-
-### Compile the bindings
-
-#### 1. Compile for Python:
-```sh
-cmake -S bindings/python -B bindings/python/build && cmake --build bindings/python/build -j
-```
-
-#### 2. Compile for nodejs:
-```sh
-cd bindings/node && npm i && npm run build && cd ../..
-```
-
-#### 3. Compile for WebAssembly
-
-First set up a stock [emsdk](https://emscripten.org/docs/getting_started/downloads.html) (no fork needed):
-```sh
-# One-time emsdk setup
-git clone https://github.com/emscripten-core/emsdk.git
-cd emsdk && ./emsdk install latest && ./emsdk activate latest
-source ./emsdk_env.sh && cd ..
-```
-
-Then configure with `emcmake`:
-```sh
-# Build the wasm bindings (emits arch3.js + arch3.wasm)
-emcmake cmake -S bindings/wasm-expanded -B bindings/wasm-expanded/build
-cmake --build bindings/wasm-expanded/build -j
-```
-
-#### 4. Compile for TypesScript
-
-Nothing to be done. File `d.ts` auto-generated.
 
 ### Run the examples
 
@@ -110,3 +72,20 @@ historical Poly3Dinv run of `examples/HectorMine/hector3.txt`.
 ```sh
 python3 examples/HectorMine/main.py
 ```
+
+#### 5. Tabular (layered) medium (python)
+
+Solves the same forward model twice — homogeneous half-space, then with an
+`arch.TabularMedium` attached — and compares the fault slip, plus displacement
+and strain on a vertical cross-section and on the free surface.
+
+```sh
+python3 examples/tabular/main.py
+```
+
+It currently reports **no difference on any field**: `TabularMedium::correction`
+is applied only in `DisplCoefficients::influence`, which the forward path never
+calls (the solver assembles through `StrainCoefficients`, and `Postprocess`
+displacement goes through `DisplCoefficients::value`). Only influence-matrix
+consumers — the slip inversion — inherit the layering today. The script is the
+regression test for wiring the correction into the forward path.
