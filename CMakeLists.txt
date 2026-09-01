@@ -38,7 +38,7 @@ FetchContent_GetProperties(arch SOURCE_DIR ARCH_INCLUDE_DIR)
 message(STATUS "Fetching Rosetta library...")
 FetchContent_Declare(
     Rosetta
-    GIT_REPOSITORY https://github.com/xaliphostes/rosetta.git
+    GIT_REPOSITORY https://github.com/rosetta-bindings/rosetta.git
     GIT_TAG        main
     GIT_SHALLOW    TRUE
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/extern/rosetta

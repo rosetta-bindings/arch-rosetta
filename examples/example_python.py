@@ -21,15 +21,29 @@
 #     binding registers the `UserRemote : BaseRemote` inheritance, so this works.
 # ============================================================================
 
+import glob
+import importlib.util
 import os
 import sys
 
-# Make the freshly built binding importable regardless of CWD.
-sys.path.insert(
-    0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "bindings", "python-expanded")
+# Load the freshly built binding regardless of CWD.
+#
+# NOTE: a plain `sys.path.insert(0, ...)` + `import arch` is NOT enough here: an
+# editable (scikit-build) install of `arch` puts a finder on `sys.meta_path`,
+# which is consulted BEFORE sys.path — so `import arch` would silently pick up
+# the stale site-packages extension instead. Loading the .so by file path
+# bypasses every finder.
+_BINDING_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "bindings", "nanobind"
 )
+_candidates = sorted(glob.glob(os.path.join(_BINDING_DIR, "arch*.so")))
+if not _candidates:
+    sys.exit(f"No built `arch` extension found in {_BINDING_DIR} — build it first.")
 
-import arch
+_spec = importlib.util.spec_from_file_location("arch", _candidates[0])
+arch = importlib.util.module_from_spec(_spec)
+sys.modules["arch"] = arch
+_spec.loader.exec_module(arch)
 
 
 # ============================================================================
