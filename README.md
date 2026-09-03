@@ -31,13 +31,13 @@ This project points [**Rosetta**](https://github.com/xaliphostes/rosetta) at the
 One-time bootstrap: fetch `rosetta` into `extern/` and build `rosetta_gen`:
 
 ```bash
-cmake -B build && cmake --build build
+cmake -B build && cmake --build build -j12
 ```
 
 Then, generate the `generator` + all the bindings and compile all of them:
 
 ```bash
-./extern/rosetta/bin/rosetta_gen --build manifest.json
+./extern/rosetta/bin/rosetta_gen --build manifest.json -j12
 ```
 
 ### Run the examples

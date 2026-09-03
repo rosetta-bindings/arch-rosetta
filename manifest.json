@@ -67,6 +67,7 @@
         {"//": "--- temperature ---", "header": "temperature/TemperatureField.h"},
 
         {"//": "--- solvers ---", "header_dir": "solvers", "entries": [
+            {"name": "Solver",  "header": "Solver.h"},
             {"name": "GmresSolver",  "header": "Gmres.h"},
             {"name": "JacobiSolver", "header": "Jacobi.h"},
             {"name": "SeidelSolver", "header": "Seidel.h"},

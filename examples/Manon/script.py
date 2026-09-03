@@ -141,37 +141,6 @@ def load_gocad_ts(filename):
 # ============================================================================
 # 0bis. Gocad TSurf (.ts) writer
 # ============================================================================
-# arch's element-local frame is ordered (normal, strike, dip) — Triangle.cxx
-# builds l2g_ = Matrix33(normal, strike, dip), which is what the string bc API
-# ("normal" -> 0, "strike" -> 1, "dip" -> 2) uses. Keep that order here so the
-# property names match the components they carry.
-LOCAL_AXES = ("normal", "strike", "dip")
-
-
-def vertex_average(surface, values, ncomp):
-    """Spread a per-triangle quantity onto the vertices of `surface`.
-
-    `values` is flat, `ncomp` components per triangle; the result is flat with
-    `ncomp` components per vertex, each the mean over the incident triangles.
-    """
-    indices = surface.indices()
-    out = [0.0] * (surface.nbVertices() * ncomp)
-    count = [0] * surface.nbVertices()
-
-    for t in range(surface.nbTriangles()):
-        for k in range(3):
-            v = indices[3 * t + k]
-            count[v] += 1
-            for c in range(ncomp):
-                out[ncomp * v + c] += values[ncomp * t + c]
-
-    for v, n in enumerate(count):
-        if n:
-            for c in range(ncomp):
-                out[ncomp * v + c] /= n
-    return out
-
-
 def save_gocad_ts(filename, surfaces, names=None):
     """Write `surfaces` as a Gocad TSurf file, one TSurf object per surface.
 
@@ -179,6 +148,36 @@ def save_gocad_ts(filename, surfaces, names=None):
     averaged from the triangles around it, as the properties
     `slip_normal slip_strike slip_dip slip_mag` (metres).
     """
+
+    # arch's element-local frame is ordered (normal, strike, dip) — Triangle.cxx
+    # builds l2g_ = Matrix33(normal, strike, dip), which is what the string bc API
+    # ("normal" -> 0, "strike" -> 1, "dip" -> 2) uses. Keep that order here so the
+    # property names match the components they carry.
+    LOCAL_AXES = ("normal", "strike", "dip")
+
+    def vertex_average(surface, values, ncomp):
+        """Spread a per-triangle quantity onto the vertices of `surface`.
+
+        `values` is flat, `ncomp` components per triangle; the result is flat with
+        `ncomp` components per vertex, each the mean over the incident triangles.
+        """
+        indices = surface.indices()
+        out = [0.0] * (surface.nbVertices() * ncomp)
+        count = [0] * surface.nbVertices()
+
+        for t in range(surface.nbTriangles()):
+            for k in range(3):
+                v = indices[3 * t + k]
+                count[v] += 1
+                for c in range(ncomp):
+                    out[ncomp * v + c] += values[ncomp * t + c]
+
+        for v, n in enumerate(count):
+            if n:
+                for c in range(ncomp):
+                    out[ncomp * v + c] /= n
+        return out
+
     with open(filename, "w") as o:
         for i, surface in enumerate(surfaces):
             name = names[i] if names else f"surface_{i}"
