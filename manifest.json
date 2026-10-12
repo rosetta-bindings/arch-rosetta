@@ -7,13 +7,14 @@
     "//6": "Headers are relative to user_include (extern/arch/include).",
     "//7": "Generate: extern/rosetta/bin/rosetta_gen manifest.json gen",
 
-    "cpp26_root": "$ENV{HOME}/devs/c++/clang-p2996/build",
-    "cpp26_cxx": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang++",
-    "cpp26_cc": "$ENV{HOME}/devs/c++/clang-p2996/build/bin/clang",
-    "cpp26_lib": "$ENV{HOME}/devs/c++/clang-p2996/build/lib",
+    "variables": [
+        { "name": "P2996", "value": "$ENV{HOME}/devs/c++/clang-p2996" }
+    ],
 
-    "wheel": true,
-    "wheel_dir": "../dist/wheels",
+    "cpp26_root": "$P2996/build",
+    "cpp26_cxx" : "$P2996/build/bin/clang++",
+    "cpp26_cc"  : "$P2996/build/bin/clang",
+    "cpp26_lib" : "$P2996/build/lib",
 
     "user_include": [
         "extern/arch/include",
@@ -32,7 +33,8 @@
     "namespace": "arch",
     "header_dir": "Arch",
     "targets": [
-        {"lang": "nanobind", "name": "arch"}
+        {"lang": "nanobind", "name": "arch", "wheel": true, "wheel_dir": "../dist/wheels"},
+        {"lang": "markdown", "name": "arch"}
     ],
 
     "classes": [
@@ -57,7 +59,8 @@
                 {"name": "Dic"},
                 {"name": "FunctionalTic"},
                 {"name": "FunctionalDic"},
-                {"name": "Coulomb"}
+                {"name": "Coulomb"},
+                {"name": "CoulombOrtho"}
             ]}
         ]},
 

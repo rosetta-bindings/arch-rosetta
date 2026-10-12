@@ -6,3 +6,4 @@ extern/
 gen/
 bindings/
 generator
+.cache/

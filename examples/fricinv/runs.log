@@ -1,0 +1,12 @@
+true    azimuth N020.0  R 0.36  s1  -120.0 MPa   friction check rms 2.8e-11
+mech    azimuth N019.1  R 0.03  s1   -13.4 MPa   A: rms 0.654 (open 66%)   B: rms 0.009 (open 0%)   C: rms 1.352 (open 0%)
+wb      azimuth N003.0  R 0.14  s1   -12.6 MPa   A: rms 2.694 (open 36%)   B: rms 0.115 (open 0%)   C: rms 0.354 (open 0%)
+Wallace-Bott misfit 2.96 deg (strike-slip, N003.0, R 0.14)
+true    azimuth N020.0  R 0.36  s1  -120.0 MPa   friction check rms 2.7e-11
+mech    azimuth N016.8  R 0.07  s1   -34.5 MPa   A: rms 0.503 (open 66%)   B: rms 0.038 (open 0%)   C: rms 0.863 (open 0%)
+wb      azimuth N015.0  R 0.30  s1   -28.0 MPa   A: rms 0.490 (open 66%)   B: rms 0.050 (open 0%)   C: rms 0.087 (open 0%)
+Wallace-Bott misfit 2.64 deg (strike-slip, N015.0, R 0.30)
+true    azimuth N020.0  R 0.36  s1  -120.0 MPa   friction check rms 2.7e-11
+mech    azimuth N016.7  R 0.07  s1   -20.2 MPa   A: rms 0.446 (open 66%)   B: rms 0.037 (open 0%)   C: rms 0.804 (open 0%)
+wb      azimuth N005.0  R 0.14  s1   -19.9 MPa   A: rms 0.865 (open 36%)   B: rms 0.085 (open 0%)   C: rms 0.357 (open 0%)
+Wallace-Bott misfit 2.70 deg (strike-slip, N005.0, R 0.14)
