@@ -7,3 +7,5 @@ gen/
 bindings/
 generator
 .cache/
+__pycache__
+examples/*.pdf
